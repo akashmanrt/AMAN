@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Akash</TITLE>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <FIELDSET>
@@ -13,11 +14,11 @@
 <p>
 <FONT FACE="Bell MT" SIZE="5">
              FIRSTNAME:-
-<INPUT TYPE="TEXT" VALUE="">   <BR><BR>                            
+<INPUT TYPE="TEXT" VALUE="" required>   <BR><BR>                            
              MIDDLENAME:-
-<INPUT TYPE="TEXT" VALUE=""><BR><BR>
+<INPUT TYPE="TEXT" VALUE="" required ><BR><BR>
 LAST NAME:-
-<INPUT TYPE="TEXT" VALUE=""><BR><BR>
+<INPUT TYPE="TEXT" VALUE="" required><BR><BR>
 PHOTO:-<BR><INPUT TYPE="FILE"><BR><BR>
 COURSE:-
 <SELECT>
@@ -28,9 +29,9 @@ COURSE:-
 <OPTION VALUE="CFA">CFA</OPTION>
 </SELECT><BR><BR>
 GENDER:-
-<INPUT TYPE="RADIO" NAME="MALE" />MALE
-<INPUT TYPE="RADIO" NAME="FEMALE" />FEMALE
-<INPUT TYPE="RADIO" NAME="OTHER" />OTHER
+<INPUT TYPE="RADIO" NAME="MALE"required />MALE
+<INPUT TYPE="RADIO" NAME="FEMALE" required/>FEMALE
+<INPUT TYPE="RADIO" NAME="OTHER" required/>OTHER
 <BR><BR>
 PHONE:-<SELECT>
 <OPTION VALUE="IND">+91</OPTION>
@@ -45,7 +46,14 @@ EMAIL:-<textarea id="id" name="name" rows="1" cols="40"></textarea>
 <BR><BR>
 SET YOUR PASSWORD:-<INPUT TYPE="ALPHANUMERIC"><BR><BR>
     RENTER YOUR PASSWORD:-<INPUT TYPE="ALPHANUMERIC"><BR><BR>
-<A HREF="AMAN.PNG"><INPUT TYPE="BUTTON" VALUE="SUBMIT"></A><BR><BR>
+
+      <button id="register-btn">Register</button>
+      <div id="success-popup" class="popup">
+          <h2>Registration Successful!</h2>
+          <p>Thank You For Registering. Your Record Is Succesfully Saved.</p>
+          <button id="close-popup-btn">Close</button>
+      </div>
+      <script src="script.js"></script>    
   <a href="AKASH.html" style="color: #cc0000"><input type="button" value="ABOUT US"></a>
 </FIELDSET>
 </body>
