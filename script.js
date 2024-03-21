@@ -4,7 +4,7 @@ document.getElementById('register-btn').addEventListener('click', function() {
     showPopup();
 });
 
-function showPopup() {
+function showPopup(up) {
     document.getElementById('success-popup').style.display = 'block';
 }
 
