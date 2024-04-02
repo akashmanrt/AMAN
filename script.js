@@ -13,7 +13,9 @@ function generateCaptcha() {
     captchaStr = '';
     for (let i = 1; i <= 5; i++) {
         captchaStr += alphaNums[Math.floor(Math.random() * alphaNums.length)];
-        ctx.fillText(alphaNums[Math.floor(Math.random() * alphaNums.length)], i * 30, 30);
+        ctx.font = `${Math.floor(Math.random() * 30) + 20}px Arial`;
+        ctx.fillStyle = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.random() * 0.8 + 0.2})`;
+        ctx.fillText(alphaNums[Math.floor(Math.random() * alphaNums.length)], i * 50, 50);
     }
     output.classList.remove('incorrect');
     output.textContent = '';
