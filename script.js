@@ -1,36 +1,74 @@
-const captcha = document.getElementById('captcha');
-const ctx = captcha.getContext('2d');
-const input = document.getElementById('captchaInput');
-const submit = document.getElementById('submit');
-const output = document.getElementById('output');
-const refresh = document.getElementById('refresh');
+let captcha;
 
-const alphaNums = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-let captchaStr = '';
+function generate() {
+ 
 
-function generateCaptcha() {
-    ctx.clearRect(0, 0, captcha.width, captcha.height);
-    captchaStr = '';
-    for (let i = 1; i <= 5; i++) {
-        captchaStr += alphaNums[Math.floor(Math.random() * alphaNums.length)];
-        ctx.font = `${Math.floor(Math.random() * 30) + 20}px Arial`;
-        ctx.fillStyle = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.random() * 0.8 + 0.2})`;
-        ctx.fillText(alphaNums[Math.floor(Math.random() * alphaNums.length)], i * 50, 50);
+    // Clear old input
+
+    document.getElementById("submit").value = "";
+ 
+
+    // Access the element to store
+
+    // the generated captcha
+
+    captcha = document.getElementById("image");
+
+    let uniquechar = "";
+ 
+
+    const randomchar =
+
+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+ 
+
+    // Generate captcha for length of
+
+    // 5 with random character
+
+    for (let i = 1; i < 5; i++) {
+
+        uniquechar += randomchar.charAt(
+
+            Math.random() * randomchar.length)
+
     }
-    output.classList.remove('incorrect');
-    output.textContent = '';
-    input.value = '';
+ 
+
+    // Store generated input
+
+    captcha.innerHTML = uniquechar;
 }
+ 
 
-generateCaptcha();
+function printmsg() {
 
-submit.addEventListener('click', () => {
-    if (input.value === captchaStr) {
-        output.textContent = 'Correct!';
-    } else {
-        output.classList.add('incorrect');
-        output.textContent = 'Incorrect! Try again.';
+    const usr_input = document
+
+        .getElementById("submit").value;
+ 
+
+    // Check whether the input is equal
+
+    // to generated captcha or not
+
+    if (usr_input == captcha.innerHTML) {
+
+        let s = document.getElementById("key")
+
+            .innerHTML = "Matched";
+
+        generate();
+
     }
-});
 
-refresh.addEventListener('click', generateCaptcha);
+    else {
+
+        let s = document.getElementById("key")
+
+            .innerHTML = "not Matched";
+
+        generate();
+
+    }
+}
