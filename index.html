@@ -3,7 +3,8 @@
 <head>
 <title>Akash</TITLE>
  
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="captcha.css">
+
 </head>
   <form>
 <body>
@@ -59,12 +60,46 @@ EMAIL:-<input type="email" required>
 SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
     RENTER YOUR PASSWORD:-<INPUT TYPE="retype" required><BR><BR>
  <div align="center">
-    <div class="captcha-container">
-        <canvas id="captcha" width="300" height="80"></canvas>
-        <input type="text" id="captchaInput" placeholder="Enter the CAPTCHA">
-        <button id="submit">Submit</button>
-        <p id="output"></p>
-        <button id="refresh">Refresh</button>
+    
+    <link rel="stylesheet" href=
+"https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+
+        integrity=
+"sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+
+        crossorigin="anonymous">
+
+    <script src="captcha.js"></script>
+
+</head>
+ 
+
+<body onload="generate()">
+
+    <div id="user-input" class="inline">
+
+        <input type="text"
+
+               id="submit"
+
+               placeholder="Captcha code" />
+
+    </div>
+ 
+
+    <div class="inline" onclick="generate()">
+
+        <i class="fas fa-sync"></i>
+
+    </div>
+ 
+
+    <div id="image"
+
+         class="inline"
+
+         selectable="False">
+
     </div>
 <br>
 <A HREF="AMAN.PNG"><input type="button" value="SUBMIT"</a>
