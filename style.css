@@ -4,16 +4,63 @@ body {
     align-items: center;
     height: 100vh;
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.captcha-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 #captcha {
-    border: 1px solid #000;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 #output {
     color: green;
+    margin-top: 10px;
 }
 
 .incorrect {
     color: red;
+}
+
+input,
+button {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0px;
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #0069d9;
+}
+
+button:active {
+    background-color: #0056b3;
+}
+
+button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
