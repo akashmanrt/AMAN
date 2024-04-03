@@ -4,6 +4,8 @@
 <title>Akash</TITLE>
 </head>
 <body bgcolor="#00FF00">
+  <feildset>
+    <form>
 <div align="center">
 <table border=20 bgcolor="red">
 <tr>
@@ -55,156 +57,55 @@ EMAIL:-<input type="email" required>
 <BR><BR>
 SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
     RENTER YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
-<div align="center">
-  <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+<div class="inputContainer">
+    <div class="center">
+        <div id="captchaBackground">
+            <div id="captchaHeading">Enter the text:</div>
+            <canvas id="captcha" width="150" height="60"></canvas>
+        </div>
+        <input type="text" id="captchaInput" required>
+    </div>
+</div>
+<div class="errorMessage" id="captchaErrorMessage"></div>
+<script>
+    function generate_captcha() {
+        let emptyArr = [];
+        for (let i = 1; i <= 7; i++) {
+            emptyArr.push(
+                String.fromCharCode(33 + Math.floor(Math.random() * 94))
+            );
         }
-        #formContainer {
-            width: 250px;
-            background-color: #fff;
-            padding: 2em;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
-        #formTitle {
-            text-align: center;
-            margin-bottom: 1em;
-        }
-        #formFields {
-            margin-bottom: 1em;
-        }
-        #captchaBackground {
-            height: 120px;
-            width: 250px;
-            background-color: #2d3748;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            border-radius: 5px;
-        }
-        #captchaHeading {
-            color: white;
-            margin-bottom: 1em;
-        }
-        #captcha {
-            height: 80%;
-            width: 80%;
-            font-size: 30px;
-            letter-spacing: 3px;
-            margin: auto;
-            display: block;
-        }
-        #submitButton {
-            background-color: #2e7d32;
-            color: #fff;
-            border: 0px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 16px;
-            font-weight: 500;
-            width: 100%;
-        }
-        #submitButton:hover {
-            background-color: #1b5e20;
-        }
-        .errorMessage {
-            color: red;
-            margin-top: 0.5em;
-            font-size: 12px;
-        }
-        .center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .inputContainer {
-            margin-bottom: 1em;
-            position: relative;
-        }
-        .inputContainer input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        .inputContainer label {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #fff;
-            padding: 0 5px;
-            font-size: 16px;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-        .inputContainer input:focus,
-        .inputContainer input:valid {
-            outline: none;
-            border-color: #2e7d32;
-        }
-        .inputContainer input:focus ~ label,
-        .inputContainer input:valid ~ label {
-            top: -15px;
-            font-size: 12px;
-            background-color: #2e7d32;
-            color: #fff;
-            padding: 5px;
-        }
-    </style>
- <div class="inputContainer">
-                <div class="center">
-                    <div id="captchaBackground">
-                        <div id="captchaHeading">Enter the text:</div>
-                        <canvas id="captcha" width="150" height="60"></canvas>
-                    </div>
-                    <input type="text" id="captchaInput" required="">
-                </div>
-            </div>
-            <div class="errorMessage" id="captchaErrorMessage"></div>
-           <script>
-        function generate_captcha() {
-            let emptyArr = [];
-            for (let i = 1; i <= 7; i++) {
-                emptyArr.push(
-                    String.fromCharCode(33 + Math.floor(Math.random() * 94))
-                );
-            }
-            let captchaStr = emptyArr.join("");
-            let ctx = document.getElementById("captcha").getContext("2d");
-            ctx.font = "30px Roboto";
-            ctx.fillStyle = "#fff";
-            ctx.clearRect(0, 0, captchaText.width, captchaText.height);
-            ctx.fillText(captchaStr, captchaText.width / 4, captchaText.height / 2);
-            document.getElementById("captchaInput").value = "";
-            document.getElementById("captchaErrorMessage").innerHTML = "";
-        }
-        let captchaText = document.getElementById("captcha");
-        var ctx = captchaText.getContext("2d");
-        window.onload = generate_captcha;
-        let refreshButton = document.getElementById("refreshButton");
+        let captchaStr = emptyArr.join("");
+        let ctx = document.getElementById("captcha").getContext("2d");
+        ctx.font = "30px Roboto";
+        ctx.fillStyle = "#fff";
+        ctx.clearRect(0, 0, captchaText.width, captchaText.height);
+        ctx.fillText(captchaStr, captchaText.width / 4, captchaText.height / 2);
+        document.getElementById("captchaInput").value = "";
+        document.getElementById("captchaErrorMessage").innerHTML = "";
+    }
+
+    let captchaText = document.getElementById("captcha");
+    var ctx = captchaText.getContext("2d");
+    window.onload = generate_captcha;
+    let refreshButton = document.getElementById("refreshButton");
+    if (refreshButton) {
         refreshButton.addEventListener("click", generate_captcha);
-        let submitButton = document.getElementById("submitButton");
+    }
+
+    let submitButton = document.getElementById("submitButton");
+    if (submitButton) {
         submitButton.addEventListener("click", function (event) {
             event.preventDefault();
             if (document.getElementById("captchaInput").value === captchaText.innerText) {
                 document.getElementById("captchaErrorMessage").innerHTML = "";
-              
                 document.getElementById("formFields").submit();
             } else {
                 document.getElementById("captchaErrorMessage").innerHTML = "Incorrect CAPTCHA!";
             }
         });
-    </script>
+    }
+</script>
 <A HREF="AMAN.PNG"><input type="button" value="SUBMIT"></a>__
 <input type="reset"><br><br>
   <a href="AKASH.html" style="color":"#588898">ABOUT US</a>
