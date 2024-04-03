@@ -2,7 +2,62 @@
 <html>
 <head>
 <title>Akash</TITLE>
- <style>
+</head>
+<body bgcolor="#00FF00">
+ <form>
+<FIELDSET>
+<div align="center">
+<table border=20 bgcolor="red">
+<tr>
+<td><B><h1>RAGISTRATION PAGE</B></h1></TD>
+</tr></table></div>
+<p>
+<FONT FACE="Bell MT" SIZE="5">
+             FIRSTNAME:-
+<INPUT TYPE="TEXT" VALUE="" required>   <BR><BR>                            
+             MIDDLENAME:-
+<INPUT TYPE="TEXT" VALUE="" ><BR><BR>
+LAST NAME:-
+<INPUT TYPE="TEXT" VALUE="" required><BR><BR>
+PHOTO:-<BR><input type="file" name="pic" accept="image/*" required><BR><BR>
+COURSE:-
+<SELECT>
+<OPTION VALUE="COURSE">COURSE</OPTION>
+<OPTION VALUE="ADCA">ADCA</OPTION>
+<OPTION VALUE="DCA">DCA</OPTION>
+<OPTION VALUE="KYP">KYP</OPTION>
+<OPTION VALUE="CFA">CFA</OPTION>
+</SELECT><BR><BR>
+GENDER:-
+
+        <div>
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male">Male</label>
+        </div>
+        <div>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+        </div>
+        <div>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+        </div>
+<BR>
+PHONE:-<SELECT>
+<OPTION VALUE="IND">+91</OPTION>
+<OPTION VALUE="PAK">+92</OPTION>
+<OPTION VALUE="USA">+1</OPTION>
+<OPTION VALUE="UK">+44</OPTION>
+<OPTION VALUE="AUS">+60</OPTION>
+</SELECT><INPUT TYPE="NUMBER" VALUE""><BR><BR>
+ADDRESS:-
+<TEXTAREA ID="ID" NAME="NAME" ROWS="1" COLS="40"></TEXTAREA><br><br>
+EMAIL:-<input type="email" required>
+<BR><BR>
+SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
+    RENTER YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
+<div align="center">
+  <style>
         body {
             font-family: 'Roboto', sans-serif;
             display: flex;
@@ -26,8 +81,8 @@
             margin-bottom: 1em;
         }
         #captchaBackground {
-            height: 220px;
-            width: 250px;
+            height: 100px;
+            width: 100px;
             background-color: #2d3748;
             display: flex;
             align-items: center;
@@ -107,66 +162,11 @@
             padding: 5px;
         }
     </style>
-</head>
-<body bgcolor="#00FF00">
- <form>
-<FIELDSET>
-<div align="center">
-<table border=20 bgcolor="red">
-<tr>
-<td><B><h1>RAGISTRATION PAGE</B></h1></TD>
-</tr></table></div>
-<p>
-<FONT FACE="Bell MT" SIZE="5">
-             FIRSTNAME:-
-<INPUT TYPE="TEXT" VALUE="" required>   <BR><BR>                            
-             MIDDLENAME:-
-<INPUT TYPE="TEXT" VALUE="" ><BR><BR>
-LAST NAME:-
-<INPUT TYPE="TEXT" VALUE="" required><BR><BR>
-PHOTO:-<BR><input type="file" name="pic" accept="image/*" required><BR><BR>
-COURSE:-
-<SELECT>
-<OPTION VALUE="COURSE">COURSE</OPTION>
-<OPTION VALUE="ADCA">ADCA</OPTION>
-<OPTION VALUE="DCA">DCA</OPTION>
-<OPTION VALUE="KYP">KYP</OPTION>
-<OPTION VALUE="CFA">CFA</OPTION>
-</SELECT><BR><BR>
-GENDER:-
-
-        <div>
-            <input type="radio" id="male" name="gender" value="male" required>
-            <label for="male">Male</label>
-        </div>
-        <div>
-            <input type="radio" id="female" name="gender" value="female">
-            <label for="female">Female</label>
-        </div>
-        <div>
-            <input type="radio" id="other" name="gender" value="other">
-            <label for="other">Other</label>
-        </div>
-<BR>
-PHONE:-<SELECT>
-<OPTION VALUE="IND">+91</OPTION>
-<OPTION VALUE="PAK">+92</OPTION>
-<OPTION VALUE="USA">+1</OPTION>
-<OPTION VALUE="UK">+44</OPTION>
-<OPTION VALUE="AUS">+60</OPTION>
-</SELECT><INPUT TYPE="NUMBER" VALUE""><BR><BR>
-ADDRESS:-
-<TEXTAREA ID="ID" NAME="NAME" ROWS="1" COLS="40"></TEXTAREA><br><br>
-EMAIL:-<input type="email" required>
-<BR><BR>
-SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
-    RENTER YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
-<div align="center">
  <div class="inputContainer">
                 <div class="center">
                     <div id="captchaBackground">
                         <div id="captchaHeading">Enter the text:</div>
-                        <canvas id="captcha" width="150" height="60"></canvas>
+                        <canvas id="captcha" width="50" height="60"></canvas>
                     </div>
                     <input type="text" id="captchaInput" required="">
                 </div>
