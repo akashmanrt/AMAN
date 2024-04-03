@@ -172,7 +172,6 @@ SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
             </div>
             <div class="errorMessage" id="captchaErrorMessage"></div>
            <script>
-        // Generate a new CAPTCHA
         function generate_captcha() {
             let emptyArr = [];
             for (let i = 1; i <= 7; i++) {
@@ -181,7 +180,6 @@ SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
                 );
             }
             let captchaStr = emptyArr.join("");
-            // Draw the CAPTCHA text
             let ctx = document.getElementById("captcha").getContext("2d");
             ctx.font = "30px Roboto";
             ctx.fillStyle = "#fff";
@@ -190,27 +188,17 @@ SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
             document.getElementById("captchaInput").value = "";
             document.getElementById("captchaErrorMessage").innerHTML = "";
         }
-
-        // Get the canvas and input box
         let captchaText = document.getElementById("captcha");
         var ctx = captchaText.getContext("2d");
-
-        // Generate a new CAPTCHA when the page loads
         window.onload = generate_captcha;
-
-        // Generate a new CAPTCHA when the refresh button is clicked
         let refreshButton = document.getElementById("refreshButton");
         refreshButton.addEventListener("click", generate_captcha);
-
-        // Get the submit button
         let submitButton = document.getElementById("submitButton");
-
-        // Check the CAPTCHA when the submit button is clicked
         submitButton.addEventListener("click", function (event) {
             event.preventDefault();
             if (document.getElementById("captchaInput").value === captchaText.innerText) {
                 document.getElementById("captchaErrorMessage").innerHTML = "";
-                // Submit the form
+              
                 document.getElementById("formFields").submit();
             } else {
                 document.getElementById("captchaErrorMessage").innerHTML = "Incorrect CAPTCHA!";
