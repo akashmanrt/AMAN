@@ -61,7 +61,7 @@ SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
     <div class="center">
         <div id="captchaBackground">
             <div id="captchaHeading">Enter the text:</div>
-            <canvas id="captcha" width="150" height="60"></canvas>
+            <canvas id="captcha" width="120" height="40"></canvas>
         </div>
         <input type="text" id="captchaInput" required>
     </div>
@@ -108,7 +108,7 @@ SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
 </script>
 
 <style>
-    .inputContainer {
+   .inputContainer {
         margin-bottom: 1em;
         position: relative;
     }
@@ -121,7 +121,7 @@ SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
             font-size: 16px;
         }
 
-        .inputContainer label {
+         .inputContainer label {
             position: absolute;
             top: 10px;
             left: 10px;
@@ -132,14 +132,14 @@ SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
             transition: all 0.3s ease;
         }
 
-        .inputContainer input:focus,
-        .inputContainer input:valid {
+      .inputContainer input:focus,
+   .inputContainer input:valid {
             outline: none;
             border-color: #2e7d32;
         }
 
         .inputContainer input:focus ~ label,
-        .inputContainer input:valid ~ label {
+   .inputContainer input:valid ~ label {
             top: -15px;
             font-size: 12px;
             background-color: #2e7d32;
@@ -147,9 +147,9 @@ SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
             padding: 5px;
         }
 
-    #captchaBackground {
-        height: 47px;
-        width: 213px;
+#captchaBackground {
+    height: 47px;
+    width: 160px;
         background-color: #000;
         display: flex;
         align-items: center;
@@ -158,21 +158,20 @@ SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
         border-radius: 5px;
     }
 
-        #captchaHeading {
+      #captchaHeading {
             color: white;
             margin-bottom: 1em;
         }
-
-        #captcha {
-            height: 80%;
-            width: 80%;
-            font-size: 30px;
-            letter-spacing: 3px;
+ #captcha {
+        height: 80%;
+        width: 80%;
+        font-size: 20px; /* updated font size */
+        letter-spacing: 2px;
             margin: auto;
             display: block;
         }
 
-    .errorMessage {
+  .errorMessage {
         color: red;
         margin-top: 0.5em;
         font-size: 12px;
