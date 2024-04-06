@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Indian Quiz Game</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    color: #333;
+  }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .question {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .options {
+    list-style-type: none;
+    padding: 0;
+  }
+  .options li {
+    margin-bottom: 10px;
+  }
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  .btn:hover {
+    background-color: #45a049;
+  }
+  #result {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="question" id="question">Question goes here</div>
+  <ul class="options" id="options">
+    <li><button class="btn" onclick="checkAnswer(this)">Option 1</button></li>
+    <li><button class="btn" onclick="checkAnswer(this)">Option 2</button></li>
+    <li><button class="btn" onclick="checkAnswer(this)">Option 3</button></li>
+    <li><button class="btn" onclick="checkAnswer(this)">Option 4</button></li>
+  </ul>
+  <div id="result"></div>
+</div>
+
+<script>
+  const questions = [
+    {
+      question: "Which is the national animal of India?",
+      options: ["Lion", "Tiger", "Elephant", "Leopard"],
+      answer: "Tiger"
+    },
+    {
+      question: "What is the capital of India?",
+      options: ["New Delhi", "Mumbai", "Kolkata", "Chennai"],
+      answer: "New Delhi"
+    },
+    {
+      question: "Who was the first Prime Minister of India?",
+      options: ["Mahatma Gandhi", "Jawaharlal Nehru", "Sardar Patel", "Indira Gandhi"],
+      answer: "Jawaharlal Nehru"
+    },
+    {
+      question: "Which river is known as the 'Ganga' in India?",
+      options: ["Yamuna", "Brahmaputra", "Indus", "Ganges"],
+      answer: "Ganges"
+    },
+    {
+      question: "What is the currency of India?",
+      options: ["Rupee", "Rupiah", "Dollar", "Peso"],
+      answer: "Rupee"
+    },
+    {
+      question: "Which Indian festival is known as the Festival of Lights?",
+      options: ["Holi", "Diwali", "Navratri", "Dussehra"],
+      answer: "Diwali"
+    },
+    {
+      question: "Who wrote the Indian national anthem 'Jana Gana Mana'?",
+      options: ["Rabindranath Tagore", "Mahatma Gandhi", "Subhas Chandra Bose", "Sarojini Naidu"],
+      answer: "Rabindranath Tagore"
+    },
+    {
+      question: "Which city in India is known as the 'Pink City'?",
+      options: ["Jaipur", "Agra", "Varanasi", "Udaipur"],
+      answer: "Jaipur"
+    },
+    {
+      question: "What is the name of the highest mountain peak in India?",
+      options: ["Mount Everest", "Kangchenjunga", "Nanda Devi", "K2"],
+      answer: "Kangchenjunga"
+    },
+    {
+      question: "Which Indian state is known as the 'Land of Five Rivers'?",
+      options: ["Punjab", "Uttar Pradesh", "Maharashtra", "Kerala"],
+      answer: "Punjab"
+    }
+  ];
+
+  let currentQuestion = 0;
+  let correctAnswers = 0;
+  let incorrectAnswers = 0;
+
+  function showQuestion() {
+    const questionElement = document.getElementById('question');
+    const optionsElement = document.getElementById('options');
+    const currentQuestionObj = questions[currentQuestion];
+    questionElement.textContent = currentQuestionObj.question;
+    optionsElement.innerHTML = '';
+    currentQuestionObj.options.forEach(option => {
+      const li = document.createElement('li');
+      const button = document.createElement('button');
+      button.textContent = option;
+      button.className = 'btn';
+      button.onclick = function() {
+        checkAnswer(this);
+      };
+      li.appendChild(button);
+      optionsElement.appendChild(li);
+    });
+  }
+
+  function checkAnswer(btn) {
+    const selectedOption = btn.textContent;
+    const currentQuestionObj = questions[currentQuestion];
+    const resultElement = document.getElementById('result');
+    if (selectedOption === currentQuestionObj.answer) {
+      resultElement.textContent = 'Correct!';
+      resultElement.style.color = '#4CAF50';
+      correctAnswers++;
+    } else {
+      resultElement.textContent = 'Wrong! The correct answer is ' + currentQuestionObj.answer;
+      resultElement.style.color = '#f44336';
+      incorrectAnswers++;
+    }
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      setTimeout(showQuestion, 1000);
+    } else {
+      if (correctAnswers === questions.length) {
+        resultElement.textContent = 'Congratulations! All answers are correct.';
+        resultElement.style.color = '#4CAF50';
+      } else {
+        resultElement.textContent = 'Quiz Completed. Correct Answers: ' + correctAnswers + ', Incorrect Answers: ' + incorrectAnswers;
+      }
+    }
+  }
+
+  showQuestion();
+</script>
+
+</body>
+</html>
