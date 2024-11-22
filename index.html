@@ -1,67 +1,155 @@
-<!Doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>RAGISTRATION PAGE</TITLE>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slingshot Game</title>
+    <style>
+        canvas {
+            display: block;
+            margin: auto;
+            background: #87CEEB; /* Sky blue */
+        }
+    </style>
 </head>
-<body bgcolor="#00FF00">
-  <div align="center">
-  <feildset>
-    <form>     
-<table border=20 bgcolor="red">
-<tr>
-<td><B><h1>RAGISTRATION PAGE</B></h1></TD>
-</tr>
-</table></div>
-<p>
-<FONT FACE="Bell MT" SIZE="5">
-             FIRSTNAME:-
-<INPUT TYPE="TEXT" VALUE="" required>   <BR><BR>                            
-             MIDDLENAME:-
-<INPUT TYPE="TEXT" VALUE="" ><BR><BR>
-LAST NAME:-
-<INPUT TYPE="TEXT" VALUE="" required><BR><BR>
-PHOTO:-<BR><input type="file" name="pic" accept="image/*" required><BR><BR>
-COURSE:-
-<SELECT>
-<OPTION VALUE="COURSE">COURSE</OPTION>
-<OPTION VALUE="ADCA">ADCA</OPTION>
-<OPTION VALUE="DCA">DCA</OPTION>
-<OPTION VALUE="KYP">KYP</OPTION>
-<OPTION VALUE="CFA">CFA</OPTION>
-</SELECT><BR><BR>
-GENDER:-
+<body>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+<script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
 
-        <div>
-            <input type="radio" id="male" name="gender" value="male" required>
-            <label for="male">Male</label>
-        </div>
-        <div>
-            <input type="radio" id="female" name="gender" value="female">
-            <label for="female">Female</label>
-        </div>
-        <div>
-            <input type="radio" id="other" name="gender" value="other">
-            <label for="other">Other</label>
-        </div>
-<BR>
-PHONE:-<SELECT>
-<OPTION VALUE="IND">+91</OPTION>
-<OPTION VALUE="PAK">+92</OPTION>
-<OPTION VALUE="USA">+1</OPTION>
-<OPTION VALUE="UK">+44</OPTION>
-<OPTION VALUE="AUS">+60</OPTION>
-</SELECT><INPUT TYPE="NUMBER" VALUE""><BR><BR>
-ADDRESS:-
-<TEXTAREA ID="ID" NAME="NAME" ROWS="1" COLS="40"></TEXTAREA><br><br>
-EMAIL:-<input type="email" value="" required>
-<BR><BR>
-SET YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
-    RENTER YOUR PASSWORD:-<INPUT TYPE="number" required><BR><BR>
-<A HREF="AMAN.PNG"><input type="button" value="SUBMIT"></a>_____
-<input type="reset"><br><br>
-  <a href="AKASH.html">ABOUT US</a>
- </form>
-</FIELDSET>
-</div>
+    // Constants
+    const GRAVITY = 0.5;
+    const FRICTION = 0.98;
+    const SLINGSHOT_BASE = { x: 150, y: 450 };
+    const BLOCK_WIDTH = 50;
+    const BLOCK_HEIGHT = 50;
+
+    // Ball
+    const ball = {
+        x: SLINGSHOT_BASE.x,
+        y: SLINGSHOT_BASE.y,
+        radius: 10,
+        dx: 0,
+        dy: 0,
+        isDragging: false,
+        isLaunched: false
+    };
+
+    // Blocks (targets)
+    const blocks = [
+        { x: 600, y: 400, width: BLOCK_WIDTH, height: BLOCK_HEIGHT },
+        { x: 650, y: 400, width: BLOCK_WIDTH, height: BLOCK_HEIGHT },
+        { x: 625, y: 350, width: BLOCK_WIDTH, height: BLOCK_HEIGHT }
+    ];
+
+    // Mouse Events
+    canvas.addEventListener("mousedown", (e) => {
+        const dist = Math.hypot(e.offsetX - ball.x, e.offsetY - ball.y);
+        if (dist < ball.radius) {
+            ball.isDragging = true;
+        }
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+        if (ball.isDragging) {
+            ball.x = e.offsetX;
+            ball.y = e.offsetY;
+        }
+    });
+
+    canvas.addEventListener("mouseup", () => {
+        if (ball.isDragging) {
+            ball.isDragging = false;
+            ball.isLaunched = true;
+
+            // Calculate velocity
+            ball.dx = (SLINGSHOT_BASE.x - ball.x) * 0.2;
+            ball.dy = (SLINGSHOT_BASE.y - ball.y) * 0.2;
+        }
+    });
+
+    // Draw functions
+    function drawBall() {
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.closePath();
+
+        // Draw slingshot line
+        if (ball.isDragging) {
+            ctx.beginPath();
+            ctx.moveTo(SLINGSHOT_BASE.x, SLINGSHOT_BASE.y);
+            ctx.lineTo(ball.x, ball.y);
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+
+    function drawBlocks() {
+        blocks.forEach((block) => {
+            ctx.fillStyle = "blue";
+            ctx.fillRect(block.x, block.y, block.width, block.height);
+        });
+    }
+
+    // Update ball position
+    function updateBall() {
+        if (ball.isLaunched) {
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            ball.dy += GRAVITY; // Gravity
+
+            // Bounce off the floor
+            if (ball.y + ball.radius > canvas.height) {
+                ball.y = canvas.height - ball.radius;
+                ball.dy *= -FRICTION;
+                ball.dx *= FRICTION;
+            }
+
+            // Stop the ball when velocity is low
+            if (Math.abs(ball.dx) < 0.1 && Math.abs(ball.dy) < 0.1) {
+                ball.isLaunched = false;
+            }
+        }
+    }
+
+    // Check for collisions with blocks
+    function checkCollisions() {
+        for (let i = 0; i < blocks.length; i++) {
+            const block = blocks[i];
+            if (
+                ball.x + ball.radius > block.x &&
+                ball.x - ball.radius < block.x + block.width &&
+                ball.y + ball.radius > block.y &&
+                ball.y - ball.radius < block.y + block.height
+            ) {
+                // Remove block
+                blocks.splice(i, 1);
+                ball.dy *= -0.5; // Bounce slightly
+                break;
+            }
+        }
+    }
+
+    // Game loop
+    function gameLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+        drawBall();
+        drawBlocks();
+
+        updateBall();
+        checkCollisions();
+
+        requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+</script>
 </body>
 </html>
